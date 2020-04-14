@@ -35,6 +35,7 @@ Laden der Wetter-Stationen Datei
 import pandas as pd
 url = "https://www1.ncdc.noaa.gov/pub/data/ghcn/daily/ghcnd-stations.txt"
 
+
 dfstations = pd.read_csv(url, sep='\t', engine='python')
 
 dfstations.head(5)
@@ -47,3 +48,16 @@ print("headers\n", headers)
 Ersetzung der Headers
 dfstations.columns = headers
 dfstations.head(10)
+
+
+# SQL Queries auf die Tabellen 
+--Weather-Daten für alle Stationen
+select * from  KHS00651.DATA AS T1
+join KHS00651.STATIONS AS T2
+ON T1.ID = T2.ID
+
+--Ermittlung TMAX
+select * from  KHS00651.DATA AS T1
+join KHS00651.STATIONS AS T2
+ON T1.ID = T2.ID
+where ELEMENT ='TMAX'
